@@ -5,9 +5,14 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { getToken, removeToken } from "@/app/utils/auth";
 
+interface User {
+  name: string;
+  email: string;
+}
+
 const ProfilePage = () => {
   const router = useRouter();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -24,10 +29,10 @@ const ProfilePage = () => {
         },
       })
         .then((res) => res.json())
-        .then((data) => {
+        .then((data: User) => {
           setUser(data);
         })
-        .catch((err) => {
+        .catch(() => {
           toast.error("حدث خطأ أثناء جلب البيانات");
         })
         .finally(() => {
@@ -58,7 +63,7 @@ const ProfilePage = () => {
       setUser(null);
       toast.success("تم تسجيل الخروج بنجاح");
       router.push("/login");
-    } catch (err) {
+    } catch {
       toast.error("فشل تسجيل الخروج");
     }
   };

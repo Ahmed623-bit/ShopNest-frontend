@@ -1,11 +1,10 @@
-// src/app/components/Navbar.tsx
 "use client";
 
 import Link from "next/link";
 import { useAuth } from "../context/AuthContext";
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
+  const { isLoggedIn, logout } = useAuth();
 
   return (
     <nav className="bg-gray-800 p-4 text-white flex justify-between">
@@ -13,9 +12,9 @@ const Navbar = () => {
         ShopNest
       </Link>
       <div className="space-x-4">
-        {user ? (
+        {isLoggedIn ? (
           <>
-            <span>Welcome, {user.name}</span>
+            <span>Welcome, User</span>
             <button onClick={logout} className="bg-red-500 px-3 py-1 rounded">
               Logout
             </button>

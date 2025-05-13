@@ -29,9 +29,16 @@ const LoginPage = () => {
       saveToken(token);
       toast.success("تم تسجيل الدخول بنجاح");
       router.push("/profile");
-    } catch (error: any) {
-      console.error("❌ Login error:", error);
-      toast.error(error.message || "حدث خطأ أثناء تسجيل الدخول");
+    } catch (error: unknown) {
+      // تحديد نوع الخطأ كـ unknown
+      if (error instanceof Error) {
+        // التحقق إذا كان الخطأ من النوع Error
+        console.error("❌ Login error:", error.message);
+        toast.error(error.message || "حدث خطأ أثناء تسجيل الدخول");
+      } else {
+        console.error("❌ Unknown error:", error);
+        toast.error("حدث خطأ غير معروف");
+      }
     } finally {
       setLoading(false);
     }

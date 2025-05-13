@@ -8,6 +8,7 @@ import {
   ReactNode,
 } from "react";
 
+// تعريف نوع AuthContext
 interface AuthContextType {
   isLoggedIn: boolean;
   token: string | null;
@@ -53,7 +54,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           setIsLoggedIn(false);
         });
     }
-  }, []);
+  }, []); // يعتمد على أول تحميل للتطبيق
 
   const login = (newToken: string) => {
     // تخزين التوكن في localStorage

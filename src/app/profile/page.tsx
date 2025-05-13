@@ -22,7 +22,7 @@ const ProfilePage = () => {
     if (token) {
       setIsLoggedIn(true);
 
-      fetch("http://localhost:5000/api/users/profile", {
+      fetch("https://shopnest-backend-lus9.onrender.com/api/users/profile", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -49,12 +49,15 @@ const ProfilePage = () => {
     const token = getToken();
 
     try {
-      const res = await fetch("http://localhost:5000/api/users/logout", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const res = await fetch(
+        "https://shopnest-backend-lus9.onrender.com/api/users/logout",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       if (!res.ok) throw new Error("Logout request failed");
 
